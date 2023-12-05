@@ -1,5 +1,13 @@
 {
     "terminal.integrated.automationProfile.linux": {
         "path": "/usr/local/bin/zsh-with-rc",
+    },
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": "src\\/.*\\.js$|input_A\\.txt$|input_B\\.txt$",
+                "cmd": "bun run src/main.js"
+            }
+        ]
     }
 }
