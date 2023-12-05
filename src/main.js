@@ -1,10 +1,12 @@
 import { RecoverCalibration, RecoverCalibrationWithWords } from "./Day1";
 import { CountValidGames, CalculateFewestPossibleCubes } from "./Day2";
+import { SumEnginePartNumbers, SumGearRatios } from "./Day3";
 import { ReadFile } from "./lib/io";
 
 const solutions = {
     "Day1": { "A": RecoverCalibration, "B": RecoverCalibrationWithWords },
     "Day2": { "A": CountValidGames, "B": CalculateFewestPossibleCubes },
+    "Day3": { "A": SumEnginePartNumbers, "B": SumGearRatios },
 };
 
 async function PrintSolutions(solutions) {
