@@ -31,20 +31,17 @@ export function SumEnginePartNumbers(input) {
 }
 
 export function SumGearRatios(input) {
-    const CalculateGearRatios = ((gearRatios, adjacentParts) =>
-        adjacentParts.length > 1
-            ? [...gearRatios, adjacentParts.reduce((gearRatio, current) => gearRatio * parseInt(current.name, 10), 1)]
-            : gearRatios);
     return ParseInput(input)
         .map((currentLine, index, array) =>
             currentLine.symbols
                 .filter(symbol => symbol.name === '*')
-                .reduce((gearRatios, currentSymbol) =>
-                    CalculateGearRatios(
-                        gearRatios,
-                        currentLine.parts
-                            .concat(array[index - 1]?.parts ?? [], array[index + 1]?.parts ?? [])
-                            .filter(part => IsAdjacent(part.position, currentSymbol.position)))
-                    , []))
+                .map(symbol => currentLine.parts
+                    .concat(array[index - 1]?.parts ?? [], array[index + 1]?.parts ?? [])
+                    .filter(part => IsAdjacent(symbol.position, part.position))
+                    .map(part => parseInt(part.name, 10)),
+                )
+                .filter(parts => parts.length > 1)
+                .map(parts => parts.reduce((dot, cur) => dot * cur, 1)),
+        )
         .reduce((sum, partsPerLine) => sum + Sum(partsPerLine), 0);
 }
